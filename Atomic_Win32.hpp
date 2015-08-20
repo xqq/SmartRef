@@ -1,0 +1,10 @@
+#ifndef _SMARTREF_ATOMIC_WIN32_HPP
+#define _SMARTREF_ATOMIC_WIN32_HPP
+
+namespace xl {
+
+
+
+}
+
+#endif // _SMARTREF_ATOMIC_WIN32_HPP

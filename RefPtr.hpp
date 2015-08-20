@@ -1,0 +1,6 @@
+#ifndef _SMARTREF_REFPTR_HPP
+#define _SMARTREF_REFPTR_HPP
+
+
+
+#endif // _SMARTREF_REFPTR_HPP
