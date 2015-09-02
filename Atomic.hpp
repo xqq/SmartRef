@@ -1,6 +1,8 @@
 #ifndef _SMARTREF_ATOMIC_HPP
 #define _SMARTREF_ATOMIC_HPP
 
+#include <cstdint>
+
 namespace xl {
 
     // Increase a int32 value by 1.
@@ -15,7 +17,7 @@ namespace xl {
     #include "Atomic_GCC.hpp"
 #elif defined(_WIN32) || defined(_MSC_VER)
     #include "Atomic_Win32.hpp"
-#elif
+#else
     #error "Unsupported compiler"
 #endif
 
