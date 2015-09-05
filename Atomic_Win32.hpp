@@ -7,11 +7,11 @@
 namespace xl {
 
     inline void AtomicIncrease(volatile int32_t* ptr) {
-        _InterlockedIncrement(static_cast<long*>(ptr));
+        _InterlockedIncrement(reinterpret_cast<volatile long*>(ptr));
     }
 
     inline bool AtomicDecrease(volatile int32_t* ptr) {
-        return 0 != _InterlockedDecrement(static_cast<long*>(ptr));
+        return 0 != _InterlockedDecrement(reinterpret_cast<volatile long*>(ptr));
     }
 
 }

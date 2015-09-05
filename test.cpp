@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <cstdlib>
 #include "SmartRef.hpp"
 
 using namespace xl;
@@ -15,8 +16,8 @@ public:
         printf("destructor for FooClass\n");
     }
 
-    void fuck() {
-        printf("fuck you!\n");
+    void Fuck() {
+        printf("Fuck you!\n");
     }
 private:
     int mArg;
@@ -27,11 +28,12 @@ int main(int argc, char** argv) {
     RefPtr<FooClass> yooo(smart);
 
     FooClass& obj = *yooo;
-    obj.fuck();
+    obj.Fuck();
 
     yooo.Reset();
     smart.Reset();
 
-    printf("attempt to return from main");
+    printf("attempt to return from main\n");
+    getchar();
     return 0;
 }
