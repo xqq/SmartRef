@@ -10,7 +10,7 @@ namespace xl {
     protected:
         explicit RefBase() : mRefCount(0) {}
         virtual ~RefBase() = default;
-
+    public:
         void AddRef() {
             AtomicIncrease(&mRefCount);
         }
@@ -34,7 +34,7 @@ namespace xl {
     protected:
         explicit RefBaseNonAtomic() : mRefCount(0) {}
         virtual ~RefBaseNonAtomic() = default;
-
+    public:
         void AddRef() {
             ++mRefCount;
         }

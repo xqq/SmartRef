@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <cstdlib>
+#include <vector>
 #include "SmartRef.hpp"
 
 using namespace xl;
@@ -26,6 +27,13 @@ private:
 int main(int argc, char** argv) {
     RefPtr<FooClass> smart = FooClass::Create(23333);
     RefPtr<FooClass> yooo(smart);
+
+    std::vector<RefPtr<FooClass>> vec;
+
+    for (int i = 0; i <= 1000; i++) {
+        vec.push_back(RefPtr<FooClass>(smart));
+    }
+    vec.clear();
 
     FooClass& obj = *yooo;
     obj.Fuck();
