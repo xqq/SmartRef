@@ -22,7 +22,7 @@ namespace xl {
 
         void Release() {
             if (!AtomicDecrease(&mRefCount)) {
-                delete reinterpret_cast<T*>(this);
+                delete static_cast<const T*>(this);
             }
         }
     private:
@@ -47,7 +47,7 @@ namespace xl {
 
         void Release() {
             if (0 == --mRefCount) {
-                delete reinterpret_cast<T*>(this);
+                delete static_cast<const T*>(this);
             }
         }
     private:
