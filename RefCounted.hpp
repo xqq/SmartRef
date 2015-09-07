@@ -1,5 +1,5 @@
-#ifndef _SMARTREF_REFBASE_HPP
-#define _SMARTREF_REFBASE_HPP
+#ifndef _SMARTREF_RECOUNTED_HPP
+#define _SMARTREF_RECOUNTED_HPP
 
 #include <cstdint>
 #include "Atomic.hpp"
@@ -7,11 +7,12 @@
 
 namespace xl {
 
-    class RefBase {
+    template <typename T>
+    class RefCounted {
     protected:
-        explicit RefBase() : mRefCount(0) {}
+        explicit RefCounted() : mRefCount(0) {}
 
-        virtual ~RefBase() {
+        ~RefCounted() {
             mRefCount = 0;
         }
     public:
@@ -21,21 +22,22 @@ namespace xl {
 
         void Release() {
             if (!AtomicDecrease(&mRefCount)) {
-                delete this;
+                delete reinterpret_cast<T*>(this);
             }
         }
     private:
-        DISALLOW_COPY_AND_ASSIGN(RefBase);
+        DISALLOW_COPY_AND_ASSIGN(RefCounted<T>);
     private:
         mutable int32_t mRefCount;
     };
 
 
-    class RefBaseNonAtomic {
+    template <typename T>
+    class RefCountedNonAtomic {
     protected:
-        explicit RefBaseNonAtomic() : mRefCount(0) {}
+        explicit RefCountedNonAtomic() : mRefCount(0) {}
 
-        virtual ~RefBaseNonAtomic() {
+        ~RefCountedNonAtomic() {
             mRefCount = 0;
         }
     public:
@@ -45,11 +47,11 @@ namespace xl {
 
         void Release() {
             if (0 == --mRefCount) {
-                delete this;
+                delete reinterpret_cast<T*>(this);
             }
         }
     private:
-        DISALLOW_COPY_AND_ASSIGN(RefBaseNonAtomic);
+        DISALLOW_COPY_AND_ASSIGN(RefCountedNonAtomic<T>);
     private:
         mutable int32_t mRefCount;
     };
@@ -57,4 +59,5 @@ namespace xl {
 
 }
 
-#endif // _SMARTREF_REFBASE_HPP
+
+#endif // _SMARTREF_RECOUNTED_HPP

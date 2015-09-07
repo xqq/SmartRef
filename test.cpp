@@ -5,7 +5,7 @@
 
 using namespace xl;
 
-class FooClass : public xl::RefBase {
+class FooClass : public xl::RefCounted<FooClass> {
 public:
     inline static RefPtr<FooClass> Create(int arg) {
         return RefPtr<FooClass>(new FooClass(arg));
@@ -13,7 +13,7 @@ public:
 public:
     explicit FooClass(int arg) : mArg(arg) {}
 
-    virtual ~FooClass() override {
+    ~FooClass() {
         printf("destructor for FooClass\n");
     }
 
