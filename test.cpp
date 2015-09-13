@@ -1,3 +1,4 @@
+#include <cassert>
 #include <cstdio>
 #include <cstdlib>
 #include <vector>
@@ -27,6 +28,10 @@ private:
 int main(int argc, char** argv) {
     RefPtr<FooClass> smart = FooClass::Create(23333);
     RefPtr<FooClass> yooo(smart);
+
+    if (yooo == nullptr) {
+        assert(false);
+    }
 
     std::vector<RefPtr<FooClass>> vec;
 

@@ -13,6 +13,7 @@ namespace xl {
         ~RefPtr() {
             if (ptr) {
                 ptr->Release();
+                ptr = nullptr;
             }
         }
 
@@ -122,6 +123,12 @@ namespace xl {
     private:
         template <typename U>
         friend class RefPtr;
+
+        typedef T* RefPtr::*Testable;
+    public:
+        operator Testable() const {
+            return ptr ? &RefPtr::ptr : nullptr;
+        }
     private:
         T* ptr;
     };
