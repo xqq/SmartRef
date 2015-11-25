@@ -33,6 +33,9 @@ int main(int argc, char** argv) {
         assert(false);
     }
 
+    yooo = FooClass::Create(12450);
+    yooo = std::move(yooo);
+
     std::vector<RefPtr<FooClass>> vec;
 
     for (int i = 0; i <= 1000; i++) {
@@ -47,6 +50,5 @@ int main(int argc, char** argv) {
     smart.Reset();
 
     printf("attempt to return from main\n");
-    getchar();
     return 0;
 }

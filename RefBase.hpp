@@ -2,6 +2,7 @@
 #define _SMARTREF_REFBASE_HPP
 
 #include <cstdint>
+#include <cassert>
 #include "Atomic.hpp"
 #include "Noncopyable.hpp"
 
@@ -12,7 +13,7 @@ namespace xl {
         explicit RefBase() : mRefCount(0) {}
 
         virtual ~RefBase() {
-            mRefCount = 0;
+            assert(mRefCount == 0);
         }
     public:
         void AddRef() {
@@ -36,7 +37,7 @@ namespace xl {
         explicit RefBaseNonAtomic() : mRefCount(0) {}
 
         virtual ~RefBaseNonAtomic() {
-            mRefCount = 0;
+            assert(mRefCount == 0);
         }
     public:
         void AddRef() {

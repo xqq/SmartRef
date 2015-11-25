@@ -88,6 +88,17 @@ namespace xl {
             return operator=(r.Get());
         }
 
+        RefPtr<T> operator=(RefPtr<T>&& r) {
+            RefPtr<T>(std::move(r)).Swap(*this);
+            return *this;
+        }
+
+        template <typename U>
+        RefPtr<T> operator=(RefPtr<U>&& r) {
+            RefPtr<T>(std::move(r)).Swap(*this);
+            return *this;
+        }
+
         template <typename U>
         bool operator==(const RefPtr<U>& rhs) const {
             return ptr == rhs.Get();
@@ -117,7 +128,7 @@ namespace xl {
             *pp = old;
         }
 
-        void Swap(const RefPtr<T>& r) {
+        void Swap(RefPtr<T>& r) {
             Swap(&r.ptr);
         }
     private:

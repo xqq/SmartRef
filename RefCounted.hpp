@@ -2,6 +2,7 @@
 #define _SMARTREF_RECOUNTED_HPP
 
 #include <cstdint>
+#include <cassert>
 #include "Atomic.hpp"
 #include "Noncopyable.hpp"
 
@@ -13,7 +14,7 @@ namespace xl {
         explicit RefCounted() : mRefCount(0) {}
 
         ~RefCounted() {
-            mRefCount = 0;
+            assert(mRefCount == 0);
         }
     public:
         void AddRef() {
@@ -38,7 +39,7 @@ namespace xl {
         explicit RefCountedNonAtomic() : mRefCount(0) {}
 
         ~RefCountedNonAtomic() {
-            mRefCount = 0;
+            assert(mRefCount == 0);
         }
     public:
         void AddRef() {
