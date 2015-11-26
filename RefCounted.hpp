@@ -17,11 +17,11 @@ namespace xl {
             assert(mRefCount == 0);
         }
     public:
-        void AddRef() {
+        void AddRef() const {
             AtomicIncrease(&mRefCount);
         }
 
-        void Release() {
+        void Release() const {
             if (!AtomicDecrease(&mRefCount)) {
                 delete static_cast<const T*>(this);
             }
@@ -42,11 +42,11 @@ namespace xl {
             assert(mRefCount == 0);
         }
     public:
-        void AddRef() {
+        void AddRef() const {
             ++mRefCount;
         }
 
-        void Release() {
+        void Release() const {
             if (0 == --mRefCount) {
                 delete static_cast<const T*>(this);
             }
